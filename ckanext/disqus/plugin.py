@@ -4,6 +4,7 @@ import hashlib
 import hmac
 import simplejson
 import time
+import six
 
 import ckan.plugins.toolkit as tk
 import ckan.plugins as p
@@ -122,7 +123,7 @@ class Disqus(p.SingletonPlugin):
             }
         )
 
-        message = base64.b64encode(SSOdata)
+        message = base64.b64encode(six.ensure_binary(SSOdata))
         # generate a timestamp for signing the message
         timestamp = int(time.time())
         # generate our hmac signature
